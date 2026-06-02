@@ -40,3 +40,77 @@
 9. Cloud Computing Network: Infrastructure used in cloud computing environments.
 10. Internet: Global network of interconnected networks.
 
+
+
+# HTTP Status Codes Cheat Sheet (Bug Bounty Basics)
+A complete list of HTTP response status codes with simple explanations for bug bounty hunters.
+
+# HTTP Status Codes
+
+## Informational
+
+| Code | Name                | Description                   |
+| ---- | ------------------- | ----------------------------- |
+| 100  | Continue            | السيرفر وافق تكمل إرسال الطلب |
+| 101  | Switching Protocols | السيرفر بيغير البروتوكول      |
+| 102  | Processing          | السيرفر لسه بيعالج الطلب      |
+
+---
+## Success
+
+| Code | Name            | Description             |
+| ---- | --------------- | ----------------------- |
+| 200  | OK              | الطلب نجح               |
+| 201  | Created         | تم إنشاء resource جديد  |
+| 202  | Accepted        | الطلب اتقبل ولسه بيتنفذ |
+| 204  | No Content      | مفيش محتوى في الرد      |
+| 206  | Partial Content | جزء من البيانات         |
+
+---
+## Redirection
+
+| Code | Name               | Description       |
+| ---- | ------------------ | ----------------- |
+| 300  | Multiple Choices   | أكتر من اختيار    |
+| 301  | Moved Permanently  | نقل دائم          |
+| 302  | Found              | إعادة توجيه مؤقتة |
+| 303  | See Other          | تحويل لـ URL تاني |
+| 304  | Not Modified       | الكاش لسه صالح    |
+| 307  | Temporary Redirect | redirect مؤقت     |
+| 308  | Permanent Redirect | redirect دائم     |
+
+---
+## Client Errors
+
+| Code | Name                          | Description         |
+| ---- | ----------------------------- | ------------------- |
+| 400  | Bad Request                   | الطلب فيه خطأ       |
+| 401  | Unauthorized                  | محتاج تسجيل دخول    |
+| 402  | Payment Required              | نادر                |
+| 403  | Forbidden                     | مفيش صلاحية         |
+| 404  | Not Found                     | مش موجود            |
+| 405  | Method Not Allowed            | method مش مسموح     |
+| 406  | Not Acceptable                | مش مناسب            |
+| 407  | Proxy Authentication Required | محتاج auth للبروكسي |
+| 408  | Request Timeout               | الطلب اتأخر         |
+| 409  | Conflict                      | تعارض               |
+| 410  | Gone                          | اتحذف نهائي         |
+| 413  | Payload Too Large             | الداتا كبيرة        |
+| 414  | URI Too Long                  | الرابط طويل         |
+| 415  | Unsupported Media Type        | نوع مش مدعوم        |
+| 429  | Too Many Requests             | rate limit          |
+
+---
+## Server Errors
+
+| Code | Name                       | Description           |
+| ---- | -------------------------- | --------------------- |
+| 500  | Internal Server Error      | خطأ في السيرفر        |
+| 501  | Not Implemented            | مش مدعوم              |
+| 502  | Bad Gateway                | مشكلة بين سيرفرات     |
+| 503  | Service Unavailable        | السيرفر واقع          |
+| 504  | Gateway Timeout            | مفيش رد من سيرفر تاني |
+| 505  | HTTP Version Not Supported | version مش مدعوم      |
+
+---
+
