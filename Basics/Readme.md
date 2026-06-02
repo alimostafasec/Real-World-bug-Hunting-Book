@@ -1,3 +1,5 @@
+# Basic Definitions
+
 1. Network: A collection of interconnected devices (e.g., computers, servers) for communication and resource sharing.
 2. Protocol: Rules and standards governing communication in a network.
 3. IP Address: Unique numerical identifier for devices on a network.
@@ -42,10 +44,8 @@
 
 
 
-# HTTP Status Codes Cheat Sheet (Bug Bounty Basics)
+# HTTP Status Codes 
 A complete list of HTTP response status codes with simple explanations for bug bounty hunters.
-
-# HTTP Status Codes
 
 ## Informational
 
@@ -55,7 +55,6 @@ A complete list of HTTP response status codes with simple explanations for bug b
 | 101  | Switching Protocols | السيرفر بيغير البروتوكول      |
 | 102  | Processing          | السيرفر لسه بيعالج الطلب      |
 
----
 ## Success
 
 | Code | Name            | Description             |
@@ -66,7 +65,7 @@ A complete list of HTTP response status codes with simple explanations for bug b
 | 204  | No Content      | مفيش محتوى في الرد      |
 | 206  | Partial Content | جزء من البيانات         |
 
----
+
 ## Redirection
 
 | Code | Name               | Description       |
@@ -79,7 +78,6 @@ A complete list of HTTP response status codes with simple explanations for bug b
 | 307  | Temporary Redirect | redirect مؤقت     |
 | 308  | Permanent Redirect | redirect دائم     |
 
----
 ## Client Errors
 
 | Code | Name                          | Description         |
@@ -100,7 +98,6 @@ A complete list of HTTP response status codes with simple explanations for bug b
 | 415  | Unsupported Media Type        | نوع مش مدعوم        |
 | 429  | Too Many Requests             | rate limit          |
 
----
 ## Server Errors
 
 | Code | Name                       | Description           |
