@@ -130,3 +130,19 @@ A complete list of HTTP response status codes with simple explanations for bug b
 
 ---
 
+# HTTP: The Language of the Web
+HTTP is the language browsers and servers use to communicate. Every HTTP Request is made up of a Method, like GET or POST; Headers, which contain metadata like cookies; and sometimes a Body with the data you're sending.
+
+Common HTTP Methods:
+
+- GET – Retrieve data (loading a page, fetching info)
+
+- POST – Send data to the server (login forms, creating something)
+
+- PUT/PATCH – Update existing data
+
+- DELETE – Remove data
+
+- OPTIONS – Check what methods are allowed (useful for recon)
+
+In return, every HTTP Response includes a Status Code to indicate the result, along with its own headers and body.
