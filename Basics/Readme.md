@@ -1,3 +1,16 @@
+# Essential Terminology
+• Scope: The list of assets (websites, applications, IP addresses) you are legally allowed to test.
+
+• Proof of Concept (PoC): A clear demonstration showing how to reproduce a vulnerability.
+
+• Triage: The process of reviewing a submitted bug report to validate it.
+
+• Severity: The level of impact a bug has (usually rated from Low to Critical).
+
+• VDP (Vulnerability Disclosure Program): A program that offers recognition but typically not money.
+
+• BBP (Bug Bounty Program): A program that offers monetary rewards (bounties).
+
 # Basic Definitions
 
 1. Network: A collection of interconnected devices (e.g., computers, servers) for communication and resource sharing.
@@ -42,7 +55,13 @@
 9. Cloud Computing Network: Infrastructure used in cloud computing environments.
 10. Internet: Global network of interconnected networks.
 
+# The Lifecycle of a Web Request
+When you use that URL, a rapid sequence of events happens.
 
+1. First, a DNS Lookup translates the domain name into an IP address.
+2. Next, your browser sends an HTTP Request to the server at that IP address, asking for the page's content.
+3. The server then processes the request and sends back an HTTP Response, which contains the raw data for the site.
+4. Finally, your browser begins Rendering and Execution. It parses the HTML to build the structure, applies the CSS to style it, and then executes the JavaScript code to add interactivity and build the final, dynamic webpage that you see.
 
 # HTTP Status Codes 
 A complete list of HTTP response status codes with simple explanations for bug bounty hunters.
