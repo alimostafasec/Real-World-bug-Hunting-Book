@@ -68,65 +68,65 @@ A complete list of HTTP response status codes with simple explanations for bug b
 
 ## Informational
 
-| Code | Name                | Description                   |
-| ---- | ------------------- | ----------------------------- |
-| 100  | Continue            | السيرفر وافق تكمل إرسال الطلب |
-| 101  | Switching Protocols | السيرفر بيغير البروتوكول      |
-| 102  | Processing          | السيرفر لسه بيعالج الطلب      |
+| Code | Name                 |
+| ---- | -------------------  |
+| 100  | Continue             |
+| 101  | Switching Protocols  |
+| 102  | Processing           |
 
 ## Success
 
-| Code | Name            | Description             |
-| ---- | --------------- | ----------------------- |
-| 200  | OK              | الطلب نجح               |
-| 201  | Created         | تم إنشاء resource جديد  |
-| 202  | Accepted        | الطلب اتقبل ولسه بيتنفذ |
-| 204  | No Content      | مفيش محتوى في الرد      |
-| 206  | Partial Content | جزء من البيانات         |
+| Code | Name             |
+| ---- | --------------- |
+| 200  | OK               |
+| 201  | Created         |
+| 202  | Accepted        |
+| 204  | No Content      |
+| 206  | Partial Content |
 
 
 ## Redirection
 
-| Code | Name               | Description       |
-| ---- | ------------------ | ----------------- |
-| 300  | Multiple Choices   | أكتر من اختيار    |
-| 301  | Moved Permanently  | نقل دائم          |
-| 302  | Found              | إعادة توجيه مؤقتة |
-| 303  | See Other          | تحويل لـ URL تاني |
-| 304  | Not Modified       | الكاش لسه صالح    |
-| 307  | Temporary Redirect | redirect مؤقت     |
-| 308  | Permanent Redirect | redirect دائم     |
+| Code | Name               |
+| ---- | ------------------ |
+| 300  | Multiple Choices   |
+| 301  | Moved Permanently  |
+| 302  | Found              |
+| 303  | See Other          | 
+| 304  | Not Modified       |
+| 307  | Temporary Redirect |
+| 308  | Permanent Redirect |
 
 ## Client Errors
 
-| Code | Name                          | Description         |
-| ---- | ----------------------------- | ------------------- |
-| 400  | Bad Request                   | الطلب فيه خطأ       |
-| 401  | Unauthorized                  | محتاج تسجيل دخول    |
-| 402  | Payment Required              | نادر                |
-| 403  | Forbidden                     | مفيش صلاحية         |
-| 404  | Not Found                     | مش موجود            |
-| 405  | Method Not Allowed            | method مش مسموح     |
-| 406  | Not Acceptable                | مش مناسب            |
-| 407  | Proxy Authentication Required | محتاج auth للبروكسي |
-| 408  | Request Timeout               | الطلب اتأخر         |
-| 409  | Conflict                      | تعارض               |
-| 410  | Gone                          | اتحذف نهائي         |
-| 413  | Payload Too Large             | الداتا كبيرة        |
-| 414  | URI Too Long                  | الرابط طويل         |
-| 415  | Unsupported Media Type        | نوع مش مدعوم        |
-| 429  | Too Many Requests             | rate limit          |
+| Code | Name                          |
+| ---- | ----------------------------- | 
+| 400  | Bad Request                   |
+| 401  | Unauthorized                  |
+| 402  | Payment Required              |
+| 403  | Forbidden                     |
+| 404  | Not Found                     |
+| 405  | Method Not Allowed            |
+| 406  | Not Acceptable                |
+| 407  | Proxy Authentication Required |
+| 408  | Request Timeout               |
+| 409  | Conflict                      | 
+| 410  | Gone                          |
+| 413  | Payload Too Large             |
+| 414  | URI Too Long                  |
+| 415  | Unsupported Media Type        |
+| 429  | Too Many Requests             |
 
 ## Server Errors
 
-| Code | Name                       | Description           |
-| ---- | -------------------------- | --------------------- |
-| 500  | Internal Server Error      | خطأ في السيرفر        |
-| 501  | Not Implemented            | مش مدعوم              |
-| 502  | Bad Gateway                | مشكلة بين سيرفرات     |
-| 503  | Service Unavailable        | السيرفر واقع          |
-| 504  | Gateway Timeout            | مفيش رد من سيرفر تاني |
-| 505  | HTTP Version Not Supported | version مش مدعوم      |
+| Code | Name                       |
+| ---- | -------------------------- |
+| 500  | Internal Server Error      |
+| 501  | Not Implemented            |
+| 502  | Bad Gateway                |
+| 503  | Service Unavailable        |
+| 504  | Gateway Timeout            |
+| 505  | HTTP Version Not Supported |
 
 ---
 
