@@ -272,3 +272,75 @@ Top Open Redirect reports from HackerOne:
 270. [Open redirect in ck.php and lg.php](https://hackerone.com/reports/1081406) to Revive Adserver - 1 upvotes, $0
 271. [Open Redirect](https://hackerone.com/reports/14699) to WePay - 0 upvotes, $300
 272. [oauth redirect uri validation bug leads to open redirect and account compromise](https://hackerone.com/reports/20661) to WePay - 0 upvotes, $0
+
+## A small trick to find Open Redirection if you couldn't find any Redirection parameters.
+
+*"I apply this everytime while testing web applications and found many Open Redirects and even an XSS using this trick!"*
+
+### Steps:
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+      1. If the Applictaion have a user Sign-In/Sign-Up feature, then register a user and log in as the user.
+      
+      2. Go to your user profile page , for example : samplesite.me/accounts/profile
+      
+      3. Copy the profile page's URL
+      
+      4. Logout and Clear all the cookies and go to the homepage of the site.
+      
+      5. Paste the Copied Profile URL on the address bar 
+      
+      6. If the site prompts for a login , check the address bar , you may find the login page with a redirect parameter like the following
+            - https://samplesite.me/login?next=accounts/profile
+            - https://samplesite.me/login?retUrl=accounts/profile
+      
+      7. Try to exploit the parameter by adding an external domain and load the crafted URL
+          eg:- https://samplesite.me/login?next=https://evil.com/
+                         (or)
+            https://samplesite.me/login?next=https://samplesite.me@evil.com/  #(to beat the bad regex filter)
+      
+      8. If it redirects to evil.com , thers's your open redirection bug.
+       
+      9. Try to leverage it to XSS
+           eg:- https://samplesite.me/login?next=javascript:alert(1);//
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Open Redirection Bypass Trick:
+
+This bypass I found in a application while I doing pentesting. I hope it will helps you too!
+
+1. While you I trying to redirect https://targetweb.com?url=http://attackersite.com it did not redirected!
+2. I Created a new subdomain with with www.targetweb.com.attackersite.com
+3. And when I tried to redirect with https://targetweb.com?url=www.targetweb.com.attackersite.com
+4. It will successfully redirected to the www.targetweb.com.attackersite.com website!
+5. Due to the bad regex it has been successfully bypass their protection!
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+## 🔗 Extracted Links
+
+| #  | Title              | Link                                                                  |
+| -- | ------------------ | --------------------------------------------------------------------- |
+| 1  | PentesterLand Home | https://pentester.land/                                               |
+| 2  | Writeups           | https://pentester.land/writeups                                       |
+| 3  | Blog               | https://pentester.land/blog/                                          |
+| 4  | Contact            | https://pentester.land/contact/                                       |
+| 5  | GitHub             | https://github.com/pentesterland/                                     |
+| 6  | Twitter            | https://twitter.com/PentesterLand                                     |
+| 7  | Writeups JSON      | https://pentester.land/writeups.json                                  |
+| 8  | Medium Writeup     | https://medium.com/@debu8er/1600-bounty-on-a-main-domain-8c30557c0f64 |
+| 9  | OAuth PDF          | https://innotommy.com/Wrong_redirect_uri_validation_in_OAuth-4.pdf    |
+| 10 | Research Paper     | https://dl.acm.org/doi/pdf/10.1145/3627106.3627140                    |
+
+> Add more links as needed...
+
+
+## 🔗 Extracted Links
+
+| # | Resource                                                                                |
+| - | --------------------------------------------------------------------------------------- |
+| 1 | [PentesterLand Home](https://pentester.land/)                                           |
+| 2 | [Writeups](https://pentester.land/writeups)                                             |
+| 3 | [Blog](https://pentester.land/blog/)                                                    |
+| 4 | [GitHub](https://github.com/pentesterland/)                                             |
+| 5 | [Medium Writeup](https://medium.com/@debu8er/1600-bounty-on-a-main-domain-8c30557c0f64) |
