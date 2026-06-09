@@ -335,12 +335,76 @@ This bypass I found in a application while I doing pentesting. I hope it will he
 > Add more links as needed...
 
 
-## 🔗 Extracted Links
+# Open Redirect Writeups 
 
-| # | Resource                                                                                |
-| - | --------------------------------------------------------------------------------------- |
-| 1 | [PentesterLand Home](https://pentester.land/)                                           |
-| 2 | [Writeups](https://pentester.land/writeups)                                             |
-| 3 | [Blog](https://pentester.land/blog/)                                                    |
-| 4 | [GitHub](https://github.com/pentesterland/)                                             |
-| 5 | [Medium Writeup](https://medium.com/@debu8er/1600-bounty-on-a-main-domain-8c30557c0f64) |
+* Story of a $1000 Open Redirect https://infosecwriteups.com/story-of-a-1000-open-redirect-1405fb8a0e7a
+* $1600 Bounty on a Main Domain https://medium.com/@debu8er/1600-bounty-on-a-main-domain-8c30557c0f64
+* Open Redirect to DOM XSS https://medium.com/@kerstan/dom-xss-on-hackerone-programs-bug-bounty-tuesday-8973ecf6af95
+* 7 Open Redirect Bypasses https://0xm5awy.medium.com/discovering-7-open-redirect-bypasses-and-3-xss-bypasses-within-a-single-program-using-same-8e87581e1a75
+* Bypassing Safe Redirect Rails https://bountyplz.xyz/bugbounty/2023/03/03/Bypassing-Safe-Redirect-in-Rails-7.0.html
+* Open Redirect to XSS Scenario https://medium.com/@ajzead660/exploit-an-unexploitable-xss-via-an-open-redirect-a-real-life-scenario-from-a-hackers-mindset-32b71041c5fe
+* Stored XSS + Open Redirect https://medium.com/@0day_exploit/stored-xss-injection-permanent-open-redirection-e14ffa11573c
+* Open Redirect to Stored XSS https://medium.com/@tushar.tilak.sharma/a-tale-of-open-redirection-to-stored-xss-6ad426ae9d43
+* Escalating Open Redirect to XSS https://sagarsajeev.medium.com/escalating-open-redirect-to-xss-d2b9355e5f05
+* From Open Redirect to Reflected XSS https://medium.com/@rodricbr/from-open-redirect-to-reflected-xss-manually-64e633a3d23f
+* Open Redirect via Sendgrid https://medium.com/@rifqihz/open-redirect-via-sendgrid-email-misconfiguration-cec4ccb07f9a
+* Open Redirect in Nvidia https://xthemo.medium.com/open-redirect-at-nvidia-62343b45f85b
+* Open Redirect Epic Games $500 https://medium.com/@bughuntar/my-first-bug-open-redirect-at-epic-games-500-bounty-d0c03de60fa7
+* Open Redirect Zapier https://monish-basaniwal.medium.com/open-redirect-vulnerability-on-zapier-an-accidental-find-4cbbf029956c
+* Open Redirect Google Dork https://infosecwriteups.com/a-swag-for-a-open-redirect-google-dork-bug-bounty-2143b943f34e
+* Open Redirect Hashnode https://gonzx.medium.com/how-i-found-open-redirect-on-hashnode-com-5f3e9ecb8dc6
+* Open Redirect Facebook https://medium.com/@abhinavsecondary/how-i-find-open-redirect-in-facebook-7e7aeb89535d
+* Open Redirect Bugcrowd https://medium.com/@ittipatjitrada_72022/how-i-found-open-redirect-on-bug-crowd-public-program-in-2-day-a217cfb70f3
+* Open Redirect Nvidia https://xthemo.medium.com/open-redirect-at-nvidia-62343b45f85b
+* Open Redirect Bentley https://amit-lt.medium.com/open-redirection-into-bentley-system-d1ee188bfb25
+* Open Redirect Slack https://medium.com/@abaykandotcom/open-redirect-in-slack-385eb34b7c5f
+* Open Redirect Instagram https://ysamm.com/?p=625
+* Open Redirect Microsoft https://burninatorsec.blogspot.com/2019/07/microsoft-id-open-redirect.html
+* Open Redirect LinkedIn https://medium.com/bugbountywriteup/bugbounty-linkedln-how-i-was-able-to-bypass-open-redirection-protection-2e143eb36941
+* Open Redirect Amazon https://medium.com/@honcbb/amazon-bypass-open-redirect-12609c879dff
+* Open Redirect Udacity https://medium.com/@aniltom/open-redirect-vulnerability-in-udacity-com-7cba7abcfd48
+* Open Redirect Facebook Bypass https://medium.com/@dwi.siswanto98/open-redirect-on-facebook-bypass-linkshim-4050f680d45c
+* Open Redirect Scanner https://medium.com/bugbountywriteup/open-redirect-scanner-c72cd60d0bf
+* Open Redirect Email https://inakcf.medium.com/open-redirect-in-email-c658c248eec1
+* Open Redirect via Link Parameter https://muhammad-aamir.medium.com/open-redirect-vulnerability-found-using-link-parameter-5fc43e2ea8fd
+* Open Redirect Unknown Technique $1000 https://ruvlol.medium.com/1000-for-open-redirect-via-unknown-technique-675f5815e38a
+* Open Redirect Yandex https://medium.com/@minometidji/how-i-bypassed-open-redirect-and-i-have-get-reward-from-yandex-5df5de836718
+* Open Redirect Facebook Multiple https://arulkumar.in/multiple-open-url-redirection-vulnerability-in-facebook-worth-1500/
+* Open Redirect Indeed https://medium.com/@SyntaxError4/reflective-xss-and-open-redirect-on-indeed-com-subdomain-b4ab40e40c83
+* Open Redirect Bol https://medium.com/@jonathanbouman/unvalidated-open-redirect-bol-com-b270151380e6
+* Open Redirect Prezi https://wss.sh/en/blog/bugbounty-malicious-redirect-on-mailroom-prezi-com/
+* Open Redirect Yahoo https://medium.com/@r0t1v/open-redirect-in-linkedin-and-yahoo-a3ffd2a9cc48
+* Open Redirect Google https://buer.haus/2015/02/03/google-com-mobile-feedback-url-redirect-regexvalidation-flaw/
+* Traveling with OAuth Account Takeover https://salt.security/blog/traveling-with-oauth-account-takeover-on-booking-com
+* OAuth Authentication Misconfiguration https://medium.com/@minometidji/oauth-authentication-misconfiguration-cb43c3b3ec24
+* Facebook Account Takeover OAuth Redirect https://ysamm.com/?p=667
+* Facebook Account Takeover Token Steal https://ysamm.com/?p=777
+* Chaining Open Redirect with XSS to Account Takeover https://radianid.medium.com/chaining-open-redirect-with-xss-to-account-takeover-36acf218a6d5
+* Full Account Takeover via Open Redirect https://medium.com/@vflexo/full-account-takeover-via-open-redirection-41c167db46
+* Open Redirect to RCE https://medium.com/@byq/from-open-redirect-to-rce-in-one-week-66a7f73fd082
+* AWS Metadata SSRF via Open Redirect https://notifybugme.medium.com/aws-internal-metadata-accessed-through-ssrf-by-chaining-an-open-redirect-bug-c4b0e4838dc
+* Client Side SSRF to Google Cloud https://blog.geekycat.in/client-side-ssrf-to-google-cloud-project-takeover/
+* Open Redirect JWT Token Leak https://medium.com/@adam.adreleve/dom-based-open-redirect-to-the-leak-of-a-jwt-token-1b1dd2ced9a1
+* OAuth Redirect URI Validation Research https://innotommy.com/Wrong_redirect_uri_validation_in_OAuth-4.pdf
+* OAuth ACM Paper https://dl.acm.org/doi/pdf/10.1145/3627106.3627140
+* Authentication Bypass via OAuth https://www.arneswinnen.net/2017/06/authentication-bypass-on-airbnb-via-oauth-tokens-theft/
+* OpenID Token Leak https://medium.com/@zseano/leaking-openid-tokens-with-the-bug-right-infront-of-you-95c1fb4a86e9
+* Alternative OpenID Token Leak https://blog.bugbountyhunter.com/leaking-openid-tokens/
+* Open Redirect to Account Takeover https://medium.com/@__rishabh__/open-redirect-to-account-takeover-e939006a9f24
+* CSRF + Open Redirect to ATO https://www.r29k.com/articles/bb/csrf
+* From Wayback Machine to Account Takeover https://r29k.com/articles/bb/ato
+* From Wayback Machine to Account Takeover Mirror https://www.r29k.com/articles/bb/ato
+* Referer Header Account Takeover https://web.archive.org/web/20201030131757/https://medium.com/@protector47/full-account-takeover-via-referrer-header-oauth-token-steal-open-redirect-vulnerability-chaining-324a14a1567
+* OAuth Callback URL Bypass https://xp.ht/oauth-authentication-bypass-on-airbnb-acquisition-using-weird-1-char-open-redirect/
+* One Click Account Takeover Case Study https://medium.com/@y.shahinzadeh/1-click-account-takeover-in-virgool-io-a-nice-case-study-6bfc3cb98ef2
+* JWT Token Hijacking via Redirect https://www.shawarkhan.com/2019/01/hijacking-accounts-by-retrieving-jwt.html
+* SSRF via Open Redirect Chain https://buer.haus/2017/03/09/airbnb-chaining-third-party-open-redirect-into-server-side-request-forgery-ssrf-via-liveperson-chat/
+* Dynamic Rendering Exploit https://r2c.dev/blog/2020/exploiting-dynamic-rendering-engines-to-take-control-of-web-apps/
+* Cache Poisoning + Redirect https://samcurry.net/abusing-http-path-normalization-and-cache-poisoning-to-steal-rocket-league-accounts/
+* HTTP Request Smuggling ATO https://hipotermia.pw/bb/http-desync-account-takeover
+* CORS Misconfig to ATO https://medium.com/@mashoud1122/cors-misconfiguration-account-takeover-out-of-scope-to-grab-items-in-scope-66d9d18c7a46
+* Stealing Passwords via SSO https://blog.scrt.ch/2021/02/25/stealing-user-passwords-through-a-vpns-sso/
+* Business ID Leak via Redirect https://philippeharewood.com/business-id-leak-via-creative-hub-redirect/
+* Redirect to Credential Phishing https://infosecwriteups.com/how-i-could-have-hacked-your-medium-account-by-phishing-your-fb-twitter-google-credentials-d53bf7096da7
+* Chain Vulnerabilities to ATO https://medium.com/bugbountywriteup/chaining-vulnerabilities-lead-to-account-takeover-b583f0c10591
+
