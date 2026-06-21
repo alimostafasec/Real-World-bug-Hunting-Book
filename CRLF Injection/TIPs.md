@@ -86,11 +86,12 @@ http://stagecafrstore.starbucks.com/%3f%0D%0ALocation://x:1%0D%0AContent-Type:te
 
 #### Exploiting CORS via HTTP Header Injection
 
-An attacker can inject HTTP headers to enable CORS (Cross-Origin Resource Sharing), bypassing the restrictions imposed by SOP. This breach allows scripts from malicious origins to interact with resources from a different origin, potentially accessing protected data.
+>An attacker can inject HTTP headers to enable CORS (Cross-Origin Resource Sharing), bypassing the restrictions imposed by SOP. This breach allows scripts from malicious origins to interact with resources from a different origin, potentially accessing protected data.
 
 #### SSRF and HTTP Request Injection via CRLF
 
-CRLF injection can be utilized to craft and inject an entirely new HTTP request. A notable example of this is the vulnerability in PHP's `SoapClient` class, specifically within the `user_agent` parameter. By manipulating this parameter, an attacker can insert additional headers and body content, or even inject a new HTTP request entirely. Below is a PHP example demonstrating this exploitation:
+>CRLF injection can be utilized to craft and inject an entirely new HTTP request. A notable example of this is the vulnerability in PHP's `SoapClient` class, specifically within the `user_agent` parameter. By manipulating this parameter, an attacker can insert additional headers and body content, or even inject a new HTTP request entirely. Below is a PHP example demonstrating this exploitation:
+
 
 ```php
 $target = 'http://127.0.0.1:9090/test';
