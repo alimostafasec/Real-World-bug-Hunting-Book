@@ -289,7 +289,7 @@ Connection: Content-Length
 # The Expect: 100-continue header
 Check how this header can help exploiting a http desync in:
 
+# Special Http Headers :
 
-###  [Special Http Headers](Special%20HTTP%20Headers.md)
-
+# [![Special HTTP Headers](https://img.shields.io/badge/Read-Special_HTTP_Headers-blue)](special-http-headers.md)
 
