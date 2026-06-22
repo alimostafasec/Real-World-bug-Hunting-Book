@@ -291,5 +291,5 @@ Check how this header can help exploiting a http desync in:
 
 # Special Http Headers :
 
-# [![Special HTTP Headers](https://img.shields.io/badge/Read-Special_HTTP_Headers-blue)](special-http-headers.md)
+# [![Special HTTP Headers](https://img.shields.io/badge/Read-Special_HTTP_Headers-blue)](Special Http Headers.md)
 
