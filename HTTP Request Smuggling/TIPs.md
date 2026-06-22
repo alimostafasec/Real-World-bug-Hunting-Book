@@ -289,58 +289,5 @@ Connection: Content-Length
 # The Expect: 100-continue header
 Check how this header can help exploiting a http desync in:
 
-## Special Http Headers :
-
-Headers to Change Location 
-----------------------------------------------------------------------------------------------------------------------
-
-Rewrite **IP source**:
-
--   `X-Originating-IP: 127.0.0.1`
--   `X-Forwarded-For: 127.0.0.1`
--   `X-Forwarded: 127.0.0.1`
--   `Forwarded-For: 127.0.0.1`
--   `X-Forwarded-Host: 127.0.0.1`
--   `X-Remote-IP: 127.0.0.1`
--   `X-Remote-Addr: 127.0.0.1`
--   `X-ProxyUser-Ip: 127.0.0.1`
--   `X-Original-URL: 127.0.0.1`
--   `Client-IP: 127.0.0.1`
--   `X-Client-IP: 127.0.0.1`
--   `X-Host: 127.0.0.1`
--   `True-Client-IP: 127.0.0.1`
--   `Cluster-Client-IP: 127.0.0.1`
--   `Via: 1.0 fred, 1.1 127.0.0.1`
--   `Connection: close, X-Forwarded-For` (Check hop-by-hop headers)
-
-Rewrite **location**:
-
--   `X-Original-URL: /admin/console`
--   `X-Rewrite-URL: /admin/console`
-
-Hop-by-Hop headers
-
-A hop-by-hop header is a header which is designed to be processed and consumed by the proxy currently handling the request, as opposed to an end-to-end header.
-
--   `Connection: close, X-Forwarded-For`
-
-HTTP Request Smuggling
-
--   `Content-Length: 30`
--   `Transfer-Encoding: chunked`
-
-------------------------------------------------------------
-
-The Expect header: 
-
-
-It's posible for the client to send the header `Expect: 100-continue` and then the server could respond with `HTTP/1.1 100 Continue` to allow the client to continue sending the body of the request. However, some proxies don't really llike this header.
-
-Interesting results of `Expect: 100-continue`:
-
--   Sending a HEAD request with a body the server didn't took into account that HEAD requests don't have body and keep the connection open until it timed out.
--   Another servers sent extrange data: Random data read from the socket in the response, secret keys or even it allowed to prevent the front-end from removing header values.
--   It also caused a `0.CL` desync cause the backend responded with a 400 response isntead of a 100 response, but the proxy front-end was prepared to send the body of the initial request, so it sends it and the backend takes it as new request.
--   Sending an `Expect: y 100-continue` variation also caused the `0.CL` desync.
--   A similar error where the backend responded with a 404 generated a `CL.0` desync because the malicious request indicates a `Content-Length` so the backend sends the malicious request + the `Content-Length` bytes of the next request (of a victim), this desyncs the queue cause the backend sends the 404 request for the malicious request + the repsonse of the victim requests, but the front end thought that only 1 request was sent, so the second response is sent to a seond victim request and the the reponse of taht one is sent to the next one...
+[Special Http Headers](Special%20HTTP%20Headers.md)
 
