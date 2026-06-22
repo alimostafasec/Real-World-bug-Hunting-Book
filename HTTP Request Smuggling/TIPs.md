@@ -289,5 +289,7 @@ Connection: Content-Length
 # The Expect: 100-continue header
 Check how this header can help exploiting a http desync in:
 
-[Special Http Headers](Special%20HTTP%20Headers.md)
+
+###  [Special Http Headers](Special%20HTTP%20Headers.md)
+
 
