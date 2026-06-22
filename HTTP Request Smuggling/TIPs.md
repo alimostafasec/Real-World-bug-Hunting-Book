@@ -12,11 +12,14 @@ This allows a user to **modify the next request that arrives to the back-end ser
 > The Transfer-Encoding header specifies the form of encoding used to safely transfer the payload body to the user.\
 > Chunked means that large data is sent in a series of chunks
 
+<br>
 
 >[!TIP]
 >* NOTE :
 >
->When trying to exploit this with Burp Suite **disable `Update Content-Length` and `Normalize HTTP/1 line endings`** in the repeater because >some gadgets abuse newlines, carriage returns and malformed content-lengths.
+> When trying to exploit this with Burp Suite **disable `Update Content-Length` and `Normalize HTTP/1 line endings`** in the repeater because some gadgets abuse newlines, carriage returns and malformed content-lengths.
+
+<br>
 
 ----
 #### CL.TE Vulnerability (Content-Length used by Front-End, Transfer-Encoding used by Back-End)
