@@ -216,3 +216,73 @@ Connection: Content-Length
 
 ----------------------------------------------------------------------------------------------------
 
+# Finding HTTP Request Smuggling
+
+>Identifying HTTP request smuggling vulnerabilities can often be achieved using timing techniques, which rely on observing how long it takes for the server to respond to manipulated requests. These techniques are particularly useful for detecting CL.TE and TE.CL vulnerabilities. Besides these methods, there are other strategies and tools that can be used to find such vulnerabilities:
+
+## Finding CL.TE Vulnerabilities Using Timing Techniques :
+
+-   **Method:**
+
+    -   Send a request that, if the application is vulnerable, will cause the back-end server to wait for additional data.
+
+    -   **Example:**
+
+        ```http
+        POST / HTTP/1.1
+        Host: vulnerable-website.com
+        Transfer-Encoding: chunked
+        Connection: keep-alive
+        Content-Length: 4
+
+        1
+        A
+        0
+        ```
+
+    -   **Observation:**
+
+        -   The front-end server processes the request based on `Content-Length` and cuts off the message prematurely.
+        -   The back-end server, expecting a chunked message, waits for the next chunk that never arrives, causing a delay.
+-   **Indicators:**
+
+    -   Timeouts or long delays in response.
+    -   Receiving a 400 Bad Request error from the back-end server, sometimes with detailed server information.
+
+## Finding TE.CL Vulnerabilities Using Timing Techniques :
+
+-   **Method:**
+
+    -   Send a request that, if the application is vulnerable, will cause the back-end server to wait for additional data.
+
+    -   **Example:**
+
+        ```http
+        POST / HTTP/1.1
+        Host: vulnerable-website.com
+        Transfer-Encoding: chunked
+        Connection: keep-alive
+        Content-Length: 6
+
+        0
+        X
+        ```
+
+    -   **Observation:**
+
+        -   The front-end server processes the request based on `Transfer-Encoding` and forwards the entire message.
+        -   The back-end server, expecting a message based on `Content-Length`, waits for additional data that never arrives, causing a delay.
+---------------------------------------------------------
+
+## Other Methods to Find Vulnerabilities :
+
+-   **Differential Response Analysis:**
+    -   Send slightly varied versions of a request and observe if the server responses differ in an unexpected way, indicating a parsing discrepancy.
+-   **Using Automated Tools:**
+    -   Tools like Burp Suite's 'HTTP Request Smuggler' extension can automatically test for these vulnerabilities by sending various forms of ambiguous requests and analyzing the responses.
+-   **Content-Length Variance Tests:**
+    -   Send requests with varying `Content-Length` values that are not aligned with the actual content length and observe how the server handles such mismatches.
+-   **Transfer-Encoding Variance Tests:**
+    -   Send requests with obfuscated or malformed `Transfer-Encoding` headers and monitor how differently the front-end and back-end servers respond to such manipulations.
+
+ 
