@@ -215,6 +215,82 @@ Connection: Content-Length
 ```
 
 ----------------------------------------------------------------------------------------------------
+<h2 align="center">HTTP Desync Attack Cheat Sheet</h2>
+
+<table>
+<tr>
+<th width="120">Type</th>
+<th width="150">Front-End</th>
+<th width="150">Back-End</th>
+<th>Description</th>
+</tr>
+
+<tr>
+<td><code>CL.TE</code></td>
+<td>Content-Length</td>
+<td>Transfer-Encoding</td>
+<td>Front-End trusts CL, Back-End trusts TE.</td>
+</tr>
+
+<tr>
+<td><code>TE.CL</code></td>
+<td>Transfer-Encoding</td>
+<td>Content-Length</td>
+<td>Front-End trusts TE, Back-End trusts CL.</td>
+</tr>
+
+<tr>
+<td><code>TE.TE</code></td>
+<td>Transfer-Encoding</td>
+<td>Transfer-Encoding</td>
+<td>TE header obfuscation causes parsing discrepancies.</td>
+</tr>
+
+<tr>
+<td><code>CL.CL</code></td>
+<td>Content-Length</td>
+<td>Content-Length</td>
+<td>Different interpretation of Content-Length headers.</td>
+</tr>
+
+<tr>
+<td><code>CL.0</code></td>
+<td>Body</td>
+<td>No Body</td>
+<td>Back-End treats Content-Length as zero.</td>
+</tr>
+
+<tr>
+<td><code>TE.0</code></td>
+<td>Chunked Body</td>
+<td>No Body</td>
+<td>Back-End ignores Transfer-Encoding.</td>
+</tr>
+
+<tr>
+<td><code>0.CL</code></td>
+<td>No Body</td>
+<td>Body</td>
+<td>Back-End waits for a body that Front-End never sends.</td>
+</tr>
+
+<tr>
+<td><code>Upgrade</code></td>
+<td>HTTP</td>
+<td>WebSocket</td>
+<td>Protocol desynchronization.</td>
+</tr>
+
+<tr>
+<td><code>Response</code></td>
+<td>Response</td>
+<td>Response</td>
+<td>Response queue poisoning / response desync.</td>
+</tr>
+
+</table>
+
+--------------------------------
 
 # Finding HTTP Request Smuggling
 
@@ -289,7 +365,98 @@ Connection: Content-Length
 # The Expect: 100-continue header
 Check how this header can help exploiting a http desync in:
 
-# Special Http Headers :
+### Special Http Headers :
 
 # [![Special HTTP Headers](https://img.shields.io/badge/Read-Special_HTTP_Headers-blue)](Special%20HTTP%20Headers.md)
+------------------------------------------------------
 
+## HTTP Request Smuggling Vulnerability Testing
+
+After confirming the effectiveness of timing techniques, it's crucial to verify if client requests can be manipulated. A straightforward method is to attempt poisoning your requests, for instance, making a request to `/` yield a 404 response. The `CL.TE` and `TE.CL` examples previously discussed in Basic Examples demonstrate how to poison a client's request to elicit a 404 response, despite the client aiming to access a different resource.
+
+***Key Considerations***
+
+When testing for request smuggling vulnerabilities by interfering with other requests, bear in mind:
+
+-   **Distinct Network Connections:** The "attack" and "normal" requests should be dispatched over separate network connections. Utilizing the same connection for both doesn't validate the vulnerability's presence.
+-   **Consistent URL and Parameters:** Aim to use identical URLs and parameter names for both requests. Modern applications often route requests to specific back-end servers based on URL and parameters. Matching these increases the likelihood that both requests are processed by the same server, a prerequisite for a successful attack.
+-   **Timing and Racing Conditions:** The "normal" request, meant to detect interference from the "attack" request, competes against other concurrent application requests. Therefore, send the "normal" request immediately following the "attack" request. Busy applications may necessitate multiple trials for conclusive vulnerability confirmation.
+-   **Load Balancing Challenges:** Front-end servers acting as load balancers may distribute requests across various back-end systems. If the "attack" and "normal" requests end up on different systems, the attack won't succeed. This load balancing aspect may require several attempts to confirm a vulnerability.
+-   **Unintended User Impact:** If your attack inadvertently impacts another user's request (not the "normal" request you sent for detection), this indicates your attack influenced another application user. Continuous testing could disrupt other users, mandating a cautious approach.
+
+
+#### Distinguishing HTTP/1.1 pipelining artifacts vs genuine request smuggling
+
+>Connection reuse (keep-alive) and pipelining can easily produce illusions of "smuggling" in testing tools that send multiple requests on the same socket. Learn to separate harmless client-side artifacts from real server-side desync.
+
+### Why pipelining creates classic false positives
+
+HTTP/1.1 reuses a single TCP/TLS connection and concatenates requests and responses on the same stream. In pipelining, the client sends multiple requests back-to-back and relies on in-order responses. A common false-positive is to resend a malformed CL.0-style payload twice on a single connection:
+
+```http
+POST / HTTP/1.1
+Host: hackxor.net
+Content_Length: 47
+
+GET /robots.txt HTTP/1.1
+X: Y
+```
+
+Responses may look like:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: text/html
+```
+
+```http
+HTTP/1.1 200 OK
+Content-Type: text/plain
+
+User-agent: *
+Disallow: /settings
+```
+
+If the server ignored the malformed `Content_Length`, there is no FE↔BE desync. With reuse, your client actually sent this byte-stream, which the server parsed as two independent requests:
+
+```http
+POST / HTTP/1.1
+Host: hackxor.net
+Content_Length: 47
+
+GET /robots.txt HTTP/1.1
+X: YPOST / HTTP/1.1
+Host: hackxor.net
+Content_Length: 47
+
+GET /robots.txt HTTP/1.1
+X: Y
+```
+
+Impact: none. You just desynced your client from the server framing.
+
+-----------------
+
+>[!IMPORTANT]
+>
+>Burp modules that depend on reuse/pipelining: Turbo Intruder with `requestsPerConnection>1`, Intruder with "HTTP/1 connection reuse", >Repeater "Send group in sequence (single connection)" or "Enable connection reuse".
+
+--------------------
+
+## Litmus tests: pipelining or real desync?
+
+1.  Disable reuse and re-test
+    -   In Burp Intruder/Repeater, turn off HTTP/1 reuse and avoid "Send group in sequence".
+    -   In Turbo Intruder, set `requestsPerConnection=1` and `pipeline=False`.
+    -   If the behavior disappears, it was likely client-side pipelining, unless you're dealing with connection-locked/stateful targets or client-side desync.
+2.  HTTP/2 nested-response check
+    -   Send an HTTP/2 request. If the response body contains a complete nested HTTP/1 response, you've proven a backend parsing/desync bug instead of a pure client artifact.
+3.  Partial-requests probe for connection-locked front-ends
+    -   Some FEs only reuse the upstream BE connection if the client reused theirs. Use partial-requests to detect FE behavior that mirrors client reuse.
+    -   See PortSwigger "Browser‑Powered Desync Attacks" for the connection-locked technique.
+4.  State probes
+    -   Look for first- vs subsequent-request differences on the same TCP connection (first-request routing/validation).
+    -   Burp "HTTP Request Smuggler" includes a connection‑state probe that automates this.
+5.  Visualize the wire
+    -   Use the Burp "HTTP Hacker" extension to inspect concatenation and message framing directly while experimenting with reuse and partial requests.
+  
