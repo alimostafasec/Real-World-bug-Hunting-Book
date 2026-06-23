@@ -912,7 +912,9 @@ X:
 -   Can you force **HTTP/1.0** to trigger a read-until-close body mode?
 -   Does the proxy ever allow **close-delimited request bodies**? That is a high-value desync smell by itself.
 
-This class often looks like CL.TE from the outside, but the real primitive is: **TE present --> CL stripped --> no valid framing recognized --> request body forwarded until close**.
+This class often looks like CL.TE from the outside, but the real primitive is: **TE present --> CL stripped --> no valid framing recognized --
+
+> **request body forwarded until close**.
 
 --------------------------------------------
 
