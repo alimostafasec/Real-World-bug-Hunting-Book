@@ -460,3 +460,20 @@ Impact: none. You just desynced your client from the server framing.
 5.  Visualize the wire
     -   Use the Burp "HTTP Hacker" extension to inspect concatenation and message framing directly while experimenting with reuse and partial requests.
   
+## Connection‑locked request smuggling (reuse-required)
+
+Some front-ends only reuse the upstream connection when the client reuses theirs. Real smuggling exists but is conditional on client-side reuse. To distinguish and prove impact:
+
+-   Prove the server-side bug
+    -   Use the HTTP/2 nested-response check, or
+    -   Use partial-requests to show the FE only reuses upstream when the client does.
+-   Show real impact even if direct cross-user socket abuse is blocked:
+    -   Cache poisoning: poison shared caches via the desync so responses affect other users.
+    -   Internal header disclosure: reflect FE-injected headers (e.g., auth/trust headers) and pivot to auth bypass.
+    -   Bypass FE controls: smuggle restricted paths/methods past the front-end.
+    -   Host-header abuse: combine with host routing quirks to pivot to internal vhosts.
+-   Operator workflow
+    -   Reproduce with controlled reuse (Turbo Intruder `requestsPerConnection=2`, or Burp Repeater tab group → "Send group in sequence (single connection)").
+    -   Then chain to cache/header-leak/control-bypass primitives and demonstrate cross-user or authorization impact.
+ 
+    -----------------------------
