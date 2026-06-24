@@ -1,22 +1,3 @@
-### Reports (Hackerone):
-
-[Report 1](https://hackerone.com/reports/737140)
-
-[Report 2](https://hackerone.com/reports/867952)
-
-[Report 3](https://hackerone.com/reports/498052)
-
-[Report 4](https://hackerone.com/reports/526880)
-
-[Report 5](https://hackerone.com/reports/771666)
-
-[Report 6](https://hackerone.com/reports/753939)
-
-[Report 7](https://hackerone.com/reports/648434)
-
-[Report 8](https://hackerone.com/reports/740037)
-
-
 ### Writeups (Medium.com):
 
 [Article 1](https://medium.com/@ricardoiramar/the-powerful-http-request-smuggling-af208fafa142)
@@ -30,7 +11,7 @@
 
 ----------------------------------------------
 
-Top Request Smuggling reports from HackerOne:
+### Top Request Smuggling reports from HackerOne:
 
 1. [Mass account takeovers using HTTP Request Smuggling on https://slackb.com/ to steal session cookies](https://hackerone.com/reports/737140) to Slack - 864 upvotes, $0
 2. [Request smuggling on admin-official.line.me could lead to account takeover](https://hackerone.com/reports/740037) to LY Corporation - 563 upvotes, $0
@@ -82,3 +63,11 @@ Top Request Smuggling reports from HackerOne:
 48. [HTTP Request Smuggling due to ignoring chunk extensions](https://hackerone.com/reports/1238099) to Node.js - 6 upvotes, $250
 49. [HTTP Request Smuggling Due to Incorrect Parsing of Multi-line Transfer-Encoding (improper fix for CVE-2022-32215)](https://hackerone.com/reports/1665156) to Node.js - 6 upvotes, $0
 50. [HTTP Request Smuggling Due to Incorrect Parsing of Header Fields](https://hackerone.com/reports/1675191) to Node.js - 6 upvotes, $0
+51. [Report 1](https://hackerone.com/reports/737140)
+52. [Report 2](https://hackerone.com/reports/867952)
+53. [Report 3](https://hackerone.com/reports/498052)
+54. [Report 4](https://hackerone.com/reports/526880)
+55. [Report 5](https://hackerone.com/reports/771666)
+56. [Report 6](https://hackerone.com/reports/753939)
+57. [Report 7](https://hackerone.com/reports/648434)
+58. [Report 8](https://hackerone.com/reports/740037)
