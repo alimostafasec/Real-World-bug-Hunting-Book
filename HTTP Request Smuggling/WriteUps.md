@@ -63,11 +63,11 @@
 48. [HTTP Request Smuggling due to ignoring chunk extensions](https://hackerone.com/reports/1238099) to Node.js - 6 upvotes, $250
 49. [HTTP Request Smuggling Due to Incorrect Parsing of Multi-line Transfer-Encoding (improper fix for CVE-2022-32215)](https://hackerone.com/reports/1665156) to Node.js - 6 upvotes, $0
 50. [HTTP Request Smuggling Due to Incorrect Parsing of Header Fields](https://hackerone.com/reports/1675191) to Node.js - 6 upvotes, $0
-51. [Report 1](https://hackerone.com/reports/737140)
-52. [Report 2](https://hackerone.com/reports/867952)
-53. [Report 3](https://hackerone.com/reports/498052)
-54. [Report 4](https://hackerone.com/reports/526880)
-55. [Report 5](https://hackerone.com/reports/771666)
-56. [Report 6](https://hackerone.com/reports/753939)
-57. [Report 7](https://hackerone.com/reports/648434)
-58. [Report 8](https://hackerone.com/reports/740037)
+51. [Report 51](https://hackerone.com/reports/737140)
+52. [Report 52](https://hackerone.com/reports/867952)
+53. [Report 53](https://hackerone.com/reports/498052)
+54. [Report 54](https://hackerone.com/reports/526880)
+55. [Report 55](https://hackerone.com/reports/771666)
+56. [Report 56](https://hackerone.com/reports/753939)
+57. [Report 57](https://hackerone.com/reports/648434)
+58. [Report 58](https://hackerone.com/reports/740037)
