@@ -1,3 +1,93 @@
+### Writeups & Reports
+
+1. [Harvesting Active Directory credentials via HTTP Request Smuggling](https://portswigger.net/daily-swig/harvesting-active-directory-credentials-via-http-request-smuggling) - 2021
+
+2. [Write up of two HTTP Requests Smuggling](https://medium.com/@C1h2e11/write-up-of-two-http-request-smuggling-bugs) - 2019
+
+3. [HTTP Request Smuggling CL.TE](https://memn0ps.github.io/http-request-smuggling-cl-te/) - 2019
+
+4. [How Did Tons of People Like Me on Tinder?](https://hackerone.com/reports/689684) to Tinder - $2,500
+
+5. [HTTP Request Smuggling + IDOR](https://medium.com/@_hipotermia_/http-request-smuggling-idor) - 2019
+
+6. [Account takeover via HTTP Request Smuggling](https://medium.com/@_hipotermia_/account-takeover-via-http-request-smuggling) - 2020
+
+7. [Escalating reflected XSS with HTTP Smuggling](https://blog.hazana.io/escalating-reflected-xss-with-http-request-smuggling/) - 2020
+
+8. [XXE-scape through the front door: circumventing the firewall with HTTP request smuggling](https://honoki.net/2020/03/18/xxe-scape-through-the-front-door/) - 2020
+
+9. [The Powerful HTTP Request Smuggling 💪](https://medium.com/bugbountywriteup/the-powerful-http-request-smuggling-17-050-bounty) - $17,050
+
+10. [Smuggling an (Un)exploitable XSS](https://blog.sonarsource.com/smuggling-an-unexploitable-xss/) - 2020
+
+11. [Get paid by smuggling, the legal way](https://portswigger.net/research/get-paid-by-smuggling-the-legal-way) - 2021
+
+12. [Exploiting HTTP Request Smuggling (TE.CL)— XSS to Website Takeover](https://kleiton0x00.github.io/posts/Exploiting-HTTP-Request-Smuggling-TE-CL-XSS-to-website-takeover/) - 2021
+
+13. [H2C Smuggling in the Wild](https://bishopfox.com/blog/h2c-smuggling-request) - 2021
+
+14. [I owe your Request | HTTP Request Smuggling leads to Full Accounts takeover](https://itsfading.github.io/posts/http-request-smuggling-account-takeover/) - 2021
+
+15. [Request Smuggling In Major Crypto Site — road to disappointment](https://infosecwriteups.com/request-smuggling-in-major-crypto-site-road-to-disappointment) - 2021
+
+16. [Practical HTTP Header Smuggling: Sneaking Past Reverse Proxies to Attack AWS and Beyond](https://medium.com/@_danielthatcher/practical-http-header-smuggling) - 2021
+
+17. [T-Reqs: HTTP Request Smuggling with Differential Fuzzing](https://www.usenix.org/conference/usenixsecurity21/presentation/jabiyev) - USENIX Security 2021
+
+18. [ICMAD SAP Vulnerabilities (CVE-2022-22536, CVE-2022-22532 & CVE-2022-22533)](https://onapsis.com/blog/icmad-sap-vulnerabilities/) - 2022
+
+19. [HDiff: A Semi-automatic Framework for Discovering Semantic Gap Attack in HTTP Implementations](https://dl.acm.org/doi/10.1145/3488932.3517408) - 2022
+
+20. [HTTP Request Smuggling on business.apple.com and Others](https://medium.com/@stealthybugs/http-request-smuggling-on-business-apple-com-and-others) - $36,000
+
+21. [Browser-Powered Desync Attacks: A New Frontier in HTTP Request Smuggling](https://portswigger.net/research/browser-powered-desync-attacks) - 2022
+
+22. [Advanced Inter-Process Desynchronization in SAP's HTTP Server](https://i.blackhat.com/USA-22/Wednesday/US-22-Doyhenard-Advanced-Inter-Process-Desynchronization.pdf) - Black Hat USA 2022
+
+23. [FRAMESHIFTER: Security Implications of HTTP/2-to-HTTP/1 Conversion Anomalies](https://www.usenix.org/conference/usenixsecurity22/presentation/jabiyev) - USENIX Security 2022
+
+24. [How to turn security research into profit: a CL.0 case study](https://portswigger.net/research/how-to-turn-security-research-into-profit) - 2022
+
+25. [How an Akamai misconfiguration earned us USD 46,000](https://blog.sprocketsecurity.com/how-an-akamai-misconfiguration-earned-us-46000-usd) - $46,000
+
+26. [Making HTTP header injection critical via response queue poisoning](https://portswigger.net/research/making-http-header-injection-critical-via-response-queue-poisoning) - $12,500
+
+27. [CVE-2022-35256 - HTTP Request Smuggling in NodeJS](https://portswigger.net/daily-swig/node-js-was-vulnerable-to-a-novel-http-request-smuggling-technique) - 2022
+
+28. [HTTP Desync Attack (Request Smuggling) - Mass Account Takeover at a Cryptocurrency based asset and 121 other websites](https://hackerone.com/reports/1668874) - $4,300
+
+29. [The easiest way I used to bypass an admin panel](https://medium.com/@siratsami71/the-easiest-way-i-used-to-bypass-an-admin-panel) - 2023
+
+30. [IBM Datapower Exploit CVE-2020-5014](https://github.com/thomascoupe/ibm-datapower-cve-2020-5014) - 2020
+
+31. [Client Side Desync Attack (CL.0 Request Smuggling) — Bounty of $150](https://infosecwriteups.com/client-side-desync-attack-cl-0-request-smuggling) - $150
+
+32. [CVE-2023-25690 - Proof of Concept](https://github.com/dhmosfunk/CVE-2023-25690-POC) - 2023
+
+33. [Abusing Client-Side Desync on Werkzeug](https://mizu.re/post/abusing-client-side-desync-on-werkzeug) - 2023
+
+34. [ZeroQlik: Achieving Unauthenticated Remote Code Execution via HTTP Request Tunneling and Path Traversal](https://labs.watchtowr.com/zeroqlik-achieving-unauthenticated-rce-on-qlik-sense/) - 2023
+
+35. [DoubleQlik: Bypassing the Fix for CVE-2023-41265 to Achieve Unauthenticated Remote Code Execution](https://labs.watchtowr.com/doubleqlik-bypassing-the-fix/) - 2023
+
+36. [Refresh: Compromising F5 BIG-IP With Request Smuggling (CVE-2023-46747)](https://bishopfox.com/blog/f5-big-ip-request-smuggling-cve-2023-46747) - 2023
+
+37. [From Akamai to F5 to NTLM... with love.](https://deadvolvo.com/from-akamai-to-f5-to-ntlm-with-love/) - 2023
+
+38. [HTTP is dead... Long live HTTP?!](https://deadvolvo.com/http-is-dead-long-live-http/) - 2023
+
+39. [Making desync attacks easy with TRACE](https://portswigger.net/research/making-desync-attacks-easy-with-trace) - 2024
+
+40. [Unveiling TE.0 HTTP Request Smuggling: Discovering a Critical Vulnerability in Thousands of Google Cloud Websites](https://www.bugcrowd.com/blog/unveiling-te-0-http-request-smuggling-discovering-a-critical-vulnerability-in-thousands-of-google-cloud-websites/) - Google Cloud - $8,500
+
+41. [Gudifu: Guided Differential Fuzzing for HTTP Request Parsing Discrepancies](https://www.usenix.org/conference/usenixsecurity24/presentation/jabiyev) - USENIX Security 2024
+
+42. [Exploiting HTTP Parsers Inconsistencies](https://rafa.hashnode.dev/exploiting-http-parsers-inconsistencies) - Parsing inconsistencies, WAF bypass, SSRF, Desync, Cache Poisoning - 2023
+
+43. [Knocking on the Front Door (Client-Side Desync Attack on Azure CDN)](https://0xjeti.com/blog/knocking-on-the-front-door-client-side-desync-on-azure-cdn/) - Microsoft Azure - $7,500
+44. 
+----------------------------------------------
+
 ### Writeups (Medium.com):
 
 [Article 1](https://medium.com/@ricardoiramar/the-powerful-http-request-smuggling-af208fafa142)
@@ -9,7 +99,8 @@
 [Article 4](https://medium.com/bugbountywriteup/crossing-the-borders-the-illegal-trade-of-http-requests-57da188520ca)
 
 
-----------------------------------------------
+-----------------------------------------------
+
 
 ### Top Request Smuggling reports from HackerOne:
 
@@ -71,3 +162,6 @@
 56. [Report 56](https://hackerone.com/reports/753939)
 57. [Report 57](https://hackerone.com/reports/648434)
 58. [Report 58](https://hackerone.com/reports/740037)
+
+
+----------------------------------
