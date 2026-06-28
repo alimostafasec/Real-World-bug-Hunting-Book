@@ -16,7 +16,7 @@
 
 8. [XXE-scape through the front door: circumventing the firewall with HTTP request smuggling](https://honoki.net/2020/03/18/xxe-scape-through-the-front-door/) - 2020
 
-9. [The Powerful HTTP Request Smuggling 💪](https://medium.com/bugbountywriteup/the-powerful-http-request-smuggling-17-050-bounty) - $17,050
+9. [The Powerful HTTP Request Smuggling](https://medium.com/bugbountywriteup/the-powerful-http-request-smuggling-17-050-bounty) - $17,050
 
 10. [Smuggling an (Un)exploitable XSS](https://blog.sonarsource.com/smuggling-an-unexploitable-xss/) - 2020
 
